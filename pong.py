@@ -14,12 +14,24 @@ l_paddle_x = 100
 l_paddle_y = 240-(paddle_size[1]/2)
 l_move = 0
 
+# define variables for fps
+fps_limit = 600
+
+# get the clock object
+clock = pygame.time.Clock()
+
+# set up the screen Surface
 screen = pygame.display.set_mode(SCREEN_SIZE, 0, 32)
 pygame.display.set_caption("Pong!")
 
 background = pygame.image.load(background_image_filename).convert()
 
 while True:
+    # limit the frame rate and capture the time in 
+    # milliseconds since the last tick (dtime_ms)
+    dtime_ms = clock.tick(fps_limit)
+    dtime_s = dtime_ms/1000.0         # time in seconds since the last tick
+
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
