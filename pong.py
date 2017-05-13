@@ -50,13 +50,21 @@ class Ball:
         pygame.draw.rect(screen, self.color, Rect((rx, ry), self.size))
         
     def move(self):
-        self.position += self.velocity * dtime_s    
-     
+        self.position += self.velocity * dtime_s  
+        self.bounce()
+        
+    def bounce(self):    
+        if self.position.y <= 0:
+            self.velocity = self.velocity.reflect(euclid.Vector2(0,1))
+            
+        elif self.position.y >= SCREEN_SIZE[1] - self.size[1]:
+            self.velocity = self.velocity.reflect(euclid.Vector2(0,1))        
+    
+    
 #######################################################
 # this is just temporary
 def get_random_velocity():
     new_angle = random.uniform(math.pi*0.25, math.pi*0.75)
-    #new_angle = math.pi*0.25
     new_x = math.sin(new_angle)
     new_y = math.cos(new_angle)
     new_vector = euclid.Vector2(new_x, new_y)
