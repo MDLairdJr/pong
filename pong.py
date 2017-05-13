@@ -58,7 +58,13 @@ class Ball:
             self.velocity = self.velocity.reflect(euclid.Vector2(0,1))
             
         elif self.position.y >= SCREEN_SIZE[1] - self.size[1]:
-            self.velocity = self.velocity.reflect(euclid.Vector2(0,1))        
+            self.velocity = self.velocity.reflect(euclid.Vector2(0,1))  
+
+    def collide(self):
+        if (int(self.position.x) == (r_paddle_x - self.size[0])):
+            if (self.position.y + self.size[1]) > r_paddle_y and self.position.y < (r_paddle_y + paddle_size[1]):
+                self.velocity = self.velocity.reflect(euclid.Vector2(1,0))
+        
     
     
 #######################################################
@@ -133,7 +139,9 @@ while True:
     pygame.draw.rect(screen, (255,255,255), Rect(l_paddle_pos, paddle_size))
     
     ball.move()
+    ball.collide()
     ball.draw()
+    pygame.display.set_caption(str(int(ball.position.x)) + "   " + str(r_paddle_x - ball.size[0]))
     
     # unlock the screen
     screen.unlock()
