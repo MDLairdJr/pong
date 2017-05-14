@@ -64,6 +64,9 @@ class Ball:
         if (int(self.position.x) == (r_paddle_x - self.size[0])):
             if (self.position.y + self.size[1]) > r_paddle_y and self.position.y < (r_paddle_y + paddle_size[1]):
                 self.velocity = self.velocity.reflect(euclid.Vector2(1,0))
+        if (int(self.position.x) == (l_paddle_x + paddle_size[0])):
+            if (self.position.y + self.size[1]) > l_paddle_y and self.position.y < (l_paddle_y + paddle_size[1]):
+                self.velocity = self.velocity.reflect(euclid.Vector2(1,0))
         
     
     
